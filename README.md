@@ -1,11 +1,11 @@
 # Santander-cibersec25
 
-OBJETIVOS
-[] Configurar duas VMs (Kali e Metasplotable2) host-only
-[] Brute force FTP
-[] Script form web DVWA
-[] Pswd spraying
-[] SMB enum
+# OBJETIVOS
+[ ] Configurar duas VMs (Kali e Metasplotable2) host-only
+[ ] Brute force FTP
+[ ] Script form web DVWA
+[ ] Pswd spraying
+[ ] SMB enum
 
 ===============================
 Ao tentar levantar Metasploitable2 na VM está apresentando kernel panic, como nao consegui resolver irei documentar o processo de aprendizado.
@@ -13,21 +13,21 @@ Ao tentar levantar Metasploitable2 na VM está apresentando kernel panic, como n
 
 ===============================
 
-BRUTE FORCE MEDUSA
+## BRUTE FORCE MEDUSA
 Para realizar o brute force com Medusa preciso garantir que a porta FTP esteja aberta, portanto é necessario usar o NMAP para verificar a vulnerabilidade realizando as seguintes etapas:
 1) Estando na mesma rede do dispositivo verificar a conexao via ping
 2) nmap -sV -p (portas para escanear), se a porta 21/tcp estiver open é possivel explorar a vulnerabilidade
 3) executar o ftp (ip alvo, no caso a VM metasploitable2)
 4) Se bem sucedido ele irá conectar e pedir usuario e senha.
 
-INICIA O BRUTE FORCE
+### INICIA O BRUTE FORCE
 
 1) Criar os arquivos txt de usuario e senha para ser combinados pelo Medusa
 2) medusa -h (ip alvo) -U (usuarios.txt) -P (senhas.txt) -M ftp (metodo) -t(numero de treads)
 Com esse comando vai ser realizada a combinaçao de usuarios-senhas fornecidos, a combinaçao correta apresentara SUCESS
 
 
-AUTOMATIZAÇAO TENTATIVAS EM FORM WEB (DVWA)
+## AUTOMATIZAÇAO TENTATIVAS EM FORM WEB (DVWA)
 ---------
 A criaçao dos arquivos txt é basicamente a mesma, o que mudará é o comando para automatizaçao, ficará assim:
 medusa -h (ip alvo) -U (usuarios.txt) -P (senhas.txt) -M http \
@@ -38,7 +38,7 @@ medusa -h (ip alvo) -U (usuarios.txt) -P (senhas.txt) -M http \
 Nesse caso o -M alterou pos mudou o modulo. O -m PAGE aponta a pagina e o -m FORM o caminho do formulario, e o -m FAIL é para verificar se for DIFERENTE de fail é porque obteve sucesso.
 
 
-ENUM + PASSWORD SPRAYING VIA SMB
+## ENUM + PASSWORD SPRAYING VIA SMB
 ---------
 Com acesso a rede é possivel realizar o ataque que se segue dessa maneira
 1) Realizar a enumeraçao de usuarios: 
